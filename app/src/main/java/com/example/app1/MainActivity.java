@@ -2,6 +2,7 @@ package com.example.app1;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -28,11 +29,21 @@ public class MainActivity extends AppCompatActivity {
         //classe textView  variavel tv = identificador textview (alterado no layout)
         TextView tv = findViewById(R.id.textView);
       // b variavel botao chama a funçao de clica acontece tal coisa
+
+        EditText edmin = findViewById(R.id.edmin);
+        EditText edmax = findViewById(R.id.edmax);
+
+
+
         // v {} função anonima
         b.setOnClickListener(view -> {
 
+            int min = Integer.parseInt( edmin.getText().toString());
+            int max = Integer.parseInt( edmax.getText().toString());
+
+
             Random random = new Random();
-            int valor =  random.nextInt();
+            int valor =  random.nextInt(min, max);
 
             tv.setText(Integer.toString(valor));
             // int p string
