@@ -10,6 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
     int contador =0;
 
@@ -28,8 +30,11 @@ public class MainActivity extends AppCompatActivity {
       // b variavel botao chama a funçao de clica acontece tal coisa
         // v {} função anonima
         b.setOnClickListener(view -> {
-            contador++;
-            tv.setText(Integer.toString(contador));
+
+            Random random = new Random();
+            int valor =  random.nextInt();
+
+            tv.setText(Integer.toString(valor));
             // int p string
         });
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
