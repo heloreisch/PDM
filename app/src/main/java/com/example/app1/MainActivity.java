@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
 
             Random random = new Random();
-            int valor =  random.nextInt(min, max);
+            //a b  10  50    (50-10)
+            int valor =  random.nextInt( max-min)+min;
 
             tv.setText(Integer.toString(valor));
             // int p string
