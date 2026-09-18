@@ -1,0 +1,121 @@
+Index: app/src/main/java/com/example/app1/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.app1;\r\n\r\nimport android.os.Bundle;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\n\r\nimport java.util.Random;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n    int contador =0;\r\n\r\n\r\n\r\n    //repara a tela básica do sistema, e faz o aplicativo ocupar o espaço inteiro do visor\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n\r\n        setContentView(R.layout.activity_main);\r\n        //classe R = referencia / id = identificador unico do botao\r\n        Button b = findViewById(R.id.button);\r\n        //classe textView  variavel tv = identificador textview (alterado no layout)\r\n        TextView tv = findViewById(R.id.textView);\r\n      // b variavel botao chama a funçao de clica acontece tal coisa\r\n\r\n        EditText edmin = findViewById(R.id.edmin);\r\n        EditText edmax = findViewById(R.id.edmax);\r\n\r\n\r\n\r\n        // v {} função anonima\r\n        b.setOnClickListener(view -> {\r\n\r\n            int min = Integer.parseInt( edmin.getText().toString());\r\n            int max = Integer.parseInt( edmax.getText().toString());\r\n\r\n\r\n            Random random = new Random();\r\n            int valor =  random.nextInt(min, max);\r\n\r\n            tv.setText(Integer.toString(valor));\r\n            // int p string\r\n        });\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {\r\n            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);\r\n            return insets;\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/app1/MainActivity.java b/app/src/main/java/com/example/app1/MainActivity.java
+--- a/app/src/main/java/com/example/app1/MainActivity.java	(revision 7042e0d7ac6ffd2204b99d2ca7ec927bf3600ed7)
++++ b/app/src/main/java/com/example/app1/MainActivity.java	(date 1789740063440)
+@@ -14,44 +14,50 @@
+ import java.util.Random;
+ 
+ public class MainActivity extends AppCompatActivity {
+-    int contador =0;
++
++    int contador = 0;
+ 
+-
+-
+-    //repara a tela básica do sistema, e faz o aplicativo ocupar o espaço inteiro do visor
++    @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         EdgeToEdge.enable(this);
+ 
+         setContentView(R.layout.activity_main);
+-        //classe R = referencia / id = identificador unico do botao
++
+         Button b = findViewById(R.id.button);
+-        //classe textView  variavel tv = identificador textview (alterado no layout)
+         TextView tv = findViewById(R.id.textView);
+-      // b variavel botao chama a funçao de clica acontece tal coisa
+ 
+         EditText edmin = findViewById(R.id.edmin);
+         EditText edmax = findViewById(R.id.edmax);
+ 
+-
+-
+-        // v {} função anonima
+         b.setOnClickListener(view -> {
+ 
+-            int min = Integer.parseInt( edmin.getText().toString());
+-            int max = Integer.parseInt( edmax.getText().toString());
++            int min = Integer.parseInt(edmin.getText().toString());
++            int max = Integer.parseInt(edmax.getText().toString());
+ 
+-
+             Random random = new Random();
+-            int valor =  random.nextInt(min, max);
++
++            int valor = random.nextInt(max - min + 1) + min;
+ 
+             tv.setText(Integer.toString(valor));
+-            // int p string
+         });
+-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+-            return insets;
+-        });
++
++        ViewCompat.setOnApplyWindowInsetsListener(
++                findViewById(R.id.main),
++                (v, insets) -> {
++                    Insets systemBars = insets.getInsets(
++                            WindowInsetsCompat.Type.systemBars()
++                    );
++
++                    v.setPadding(
++                            systemBars.left,
++                            systemBars.top,
++                            systemBars.right,
++                            systemBars.bottom
++                    );
++
++                    return insets;
++                }
++        );
+     }
+-}
+\ No newline at end of file
++}
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"CHOOSE_PER_TEST\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 7042e0d7ac6ffd2204b99d2ca7ec927bf3600ed7)
++++ b/.idea/gradle.xml	(date 1789740219611)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_21\" project-jdk-name=\"jbr-21\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 7042e0d7ac6ffd2204b99d2ca7ec927bf3600ed7)
++++ b/.idea/misc.xml	(date 1789739987653)
+@@ -1,9 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">
+-    <output url="file://$PROJECT_DIR$/build/classes" />
+-  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" project-jdk-name="jbr-21" project-jdk-type="JavaSDK" />
+   <component name="ProjectType">
+     <option name="id" value="Android" />
+   </component>
