@@ -50,12 +50,13 @@ public class MainActivity extends AppCompatActivity {
         botaoProximo.setOnClickListener( View -> {
             posicao ++;
             imageView.setImageResource(imagens[posicao]);
+            if (posicao == imagens.length -1) posicao = 0;
         });
 
         botaoVoltar.setOnClickListener( View ->  {
-
                 imageView.setImageResource(imagens[posicao]);
-        posicao--;
+            posicao--;
+
         if(posicao < 0) posicao = imagens.length -1;
     });
     }
