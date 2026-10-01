@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/alturausu"
+        android:layout_width="99dp"
+        android:layout_height="29dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="232dp"
+        tools:layout_editor_absoluteY="117dp" />
+
+    <TextView
+        android:id="@+id/altura2"
+        android:layout_width="183dp"
+        android:layout_height="29dp"
+        android:text="Altura(m)"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="11dp"
+        tools:layout_editor_absoluteY="117dp" />
+
+    <TextView
+        android:id="@+id/peso2"
+        android:layout_width="178dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="64dp"
+        android:text="Peso(Kg)"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/pesousu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.105" />
+
+    <TextView
+        android:id="@+id/pesousu"
+        android:layout_width="99dp"
+        android:layout_height="29dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="232dp"
+        tools:layout_editor_absoluteY="64dp" />
+
+    <TextView
+        android:id="@+id/imc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IMC:"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="188dp" />
+
+    <TextView
+        android:id="@+id/resultado"
+        android:layout_width="92dp"
+        android:layout_height="28dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="188dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="379dp"
+        android:layout_height="303dp"
+        app:srcCompat="@drawable/perfil"
+        tools:layout_editor_absoluteX="11dp"
+        tools:layout_editor_absoluteY="245dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
