@@ -2,8 +2,6 @@ package com.example.app1;
 
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -17,44 +15,74 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    EditText nome;
-    ArrayList<String> nomes;
 
-     @Override
+    private EditText editTitulo;
+    private EditText editTexto;
+    private ListView listView;
+    private Button btnSalvar;
+
+    private DatabaseHelper dbHelper;
+    private ArrayList<Nota> listaNotas;
+    private NotaAdapter adapter;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        ViewCompat.setOnApplyWindowInsetsListener(
+                findViewById(R.id.main), (v, insets) -> {
+                    Insets systemBars = insets.getInsets(
+                            WindowInsetsCompat.Type.systemBars()
+                    );
+                    v.setPadding(
+                            systemBars.left,
+                            systemBars.top,
+                            systemBars.right,
+                            systemBars.bottom
+                    );
+                    return insets;
+                }
+        );
+
+        editTitulo = findViewById(R.id.editTitulo);
+        editTexto = findViewById(R.id.editTexto);
+        btnSalvar = findViewById(R.id.salvar);
+        listView = findViewById(R.id.ListView);
+
+        dbHelper = new DatabaseHelper(this);
+
+        carregarNotas();
+
+        btnSalvar.setOnClickListener(v -> {
+            String titulo = editTitulo.getText().toString().trim();
+            String texto = editTexto.getText().toString().trim();
+
+            if (!titulo.isEmpty() || !texto.isEmpty()) {
+                long result = dbHelper.inserirNota(titulo, texto);
+                if (result != -1) {
+                    Toast.makeText(this, "Nota salva com sucesso!", Toast.LENGTH_SHORT).show();
+                    editTitulo.setText("");
+                    editTexto.setText("");
+                    carregarNotas();
+                } else {
+                    Toast.makeText(this, "Erro ao salvar nota!", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "Digite um título ou texto!", Toast.LENGTH_SHORT).show();
+            }
         });
-         ListView lista =  findViewById(R.id.ListView);
-         EditText nome = findViewById(R.id.editNome);
-        Button salvar = findViewById(R.id.salvar);
 
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Nota nota = listaNotas.get(position);
+            Toast.makeText(this, "Nota: " + nota.getTitulo(), Toast.LENGTH_SHORT).show();
+        });
+    }
 
-
-         ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, R.layout.itens, R.id.textView, nomes);
-         salvar.setOnClickListener(v -> {
-             String nomes = nome.getText().toString().trim();
-             if (!nomes.isEmpty()) {
-                 nomes.add(nome);
-                 adaptador.notifyDataSetChanged();
-                 nome.setText("");
-
-                 Toast.makeText(this, "Nome salvo!", Toast.LENGTH_SHORT).show();
-
-             } else {
-                 Toast.makeText(this, "Digite um nome!", Toast.LENGTH_SHORT).show();
-             }
-         });
-
-
-         lista.setAdapter(adaptador);
-         lista.setOnItemClickListener((parent, view, position, id) -> {
-             Toast.makeText(this, nomes.get(position), Toast.LENGTH_LONG).show();
-         });
+    private void carregarNotas() {
+        listaNotas = dbHelper.listarNotas();
+        adapter = new NotaAdapter(this, listaNotas);
+        listView.setAdapter(adapter);
     }
 }
