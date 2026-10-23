@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         button=findViewById(R.id.button);
         listView=findViewById(R.id.listview);
 
+          //  listView.setOnClickListener(( adapterView, view, i, long l ->));{
+          // Toast.makeText(getApplicationContext(), id, Toast.LENGTH_LONG).show();
 
         button.setOnClickListener( view -> {
             String titulo=editText.getText().toString();
